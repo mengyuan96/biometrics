@@ -28,7 +28,7 @@ def main():
     #data_preparation.batch_nef2jpg(nef_dir, csv_path, training_dir, testing_dir)
     
     # iterate over training_data to create gallery_images
-    cnt = 0
+
     subjects = os.listdir(training_dir)
     gallery_images = dict()
     for subject in subjects:
@@ -37,13 +37,11 @@ def main():
             imgs = os.listdir(subject_folder_path)
             for img in imgs:
                 if img.startswith('9'):
-                    if cnt < 50:
-                        img_path = os.path.join(subject_folder_path, img)
-                        gallery_images[subject] = img_path
-                        cnt += 1
+                     img_path = os.path.join(subject_folder_path, img)
+                     gallery_images[subject] = img_path
+                    
     
     # iterate over testing_data to create probe_images
-    cnt = 0
     subjects = os.listdir(testing_dir)
     probe_images = dict()
     for subject in subjects:
@@ -52,10 +50,9 @@ def main():
             imgs = os.listdir(subject_folder_path)
             for img in imgs:
                 if img.startswith('9'):
-                    if cnt < 50:
-                        img_path = os.path.join(subject_folder_path, img)
-                        probe_images[subject] = img_path
-                        cnt += 1
+                     img_path = os.path.join(subject_folder_path, img)
+                     probe_images[subject] = img_path
+                 
             
     #train eigenface model
     mean_face, eigenvects = eigenface.RecognitionVector(gallery_images, k=n_eigenvects)
